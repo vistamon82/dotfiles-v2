@@ -1,0 +1,38 @@
+#! /bin/sh
+
+#PANEL_HEIGHT=20
+#PANEL_FONT_FAMILY="Gohufont:size=10"
+#ICON_FONT="Stlarch:size=10"
+#PANEL_FONT_FAMILY1="-misc-fixed-medium-r-normal--10-100-75-75-c-60-iso10646-1"
+PANEL_FONT_FAMILY1="tamsyn:size=9"
+PANEL_FONT_FAMILY2="Siji:size=6"
+#export FONT_LINUX="font-linux:size=18"
+export PANEL_HEIGHT=20
+
+bspc config top_padding $PANEL_HEIGHT
+
+if [ $(pgrep -cx panel) -gt 1 ] ; then
+	printf "%s\n" "The panel is already running." >&2
+	exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+bspc config top_padding $PANEL_HEIGHT
+bspc control --subscribe > "$PANEL_FIFO" &
+xtitle -sf 'T%s' > "$PANEL_FIFO" &
+clock.sh > "$PANEL_FIFO" &
+bright.sh > "$PANEL_FIFO" &
+sound.sh > "$PANEL_FIFO" &
+wifi.sh > "$PANEL_FIFO" &
+
+bat.sh > "$PANEL_FIFO" &
+
+. panel_colors
+
+cat "$PANEL_FIFO" | panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY1" -f "$PANEL_FONT_FAMILY2" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
+
+wait
