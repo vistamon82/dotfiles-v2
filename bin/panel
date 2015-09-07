@@ -11,6 +11,23 @@ export PANEL_HEIGHT=20
 
 bspc config top_padding $PANEL_HEIGHT
 
+VOLUME() {
+	while :; do
+        VOLUME=$(amixer sget Master | sed -n "0,/.*\[\([0-9]\+\)%\].*/s//\1/p")
+        STATE=$(amixer sget Master | tail -n1 | awk '{print $(NF)}' | sed 's/\[//g;s/\]//g')
+        if   [[ $VOLUME -eq 0 || $STATE = 'off' ]]; then
+            ICON=''
+        elif [[ $VOLUME -gt 50 ]]; then
+            ICON=''
+        else    
+            ICON=''
+        fi
+        echo "V$ICON $VOLUME%"
+        unset VOLUME STATE ICON
+		sleep 1
+	done
+}
+
 if [ $(pgrep -cx panel) -gt 1 ] ; then
 	printf "%s\n" "The panel is already running." >&2
 	exit 1
@@ -28,11 +45,11 @@ clock.sh > "$PANEL_FIFO" &
 bright.sh > "$PANEL_FIFO" &
 sound.sh > "$PANEL_FIFO" &
 wifi.sh > "$PANEL_FIFO" &
-
+VOLUME > "$PANEL_FIFO" &
 bat.sh > "$PANEL_FIFO" &
 
 . panel_colors
 
-cat "$PANEL_FIFO" | panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY1" -f "$PANEL_FONT_FAMILY2" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
+cat "$PANEL_FIFO" | panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY1" -f "$PANEL_FONT_FAMILY2" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" | sh &
 
 wait

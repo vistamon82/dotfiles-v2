@@ -10,9 +10,9 @@ xsetroot -cursor_name left_ptr
 
 exec pulseaudio --start &
 
-udiskie &
+compton &
 
-rofi -key-run mod4+space &
+udiskie &
 
 panel &
 /home/anon/.fehbg &

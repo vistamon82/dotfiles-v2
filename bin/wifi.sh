@@ -33,7 +33,7 @@ do
         elif [ $STATUS == 'SCANNING' ];
                 then
                 NETWORK='Scanning...'
-                ICON=''
+                ICON=''
         elif [ $STATUS == 'AUTHENTICATING' ];
                 then
                 NETWORK='Authenticating...'
