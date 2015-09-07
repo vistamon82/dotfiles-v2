@@ -1,6 +1,6 @@
 [options]
 font = Terminess Powerline, Siji 12
-browser = firefox
+browser = firefox-developer
 
 [colors]
 
