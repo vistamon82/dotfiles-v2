@@ -9,4 +9,4 @@ on login, if headphones are already plugged in, sound comes out speaker? http://
 
 ###for centos
 
-looking for dunst? http://copr-be.cloud.fedoraproject.org/results/maxamillion/epel7-i3wm/epel-7-x86_64/
+looking for dunst/i3/dzen2? http://copr-be.cloud.fedoraproject.org/results/maxamillion/epel7-i3wm/epel-7-x86_64/
