@@ -12,3 +12,5 @@ on login, if headphones are already plugged in, sound comes out speaker? http://
 looking for dunst/i3/dzen2? http://copr-be.cloud.fedoraproject.org/results/maxamillion/epel7-i3wm/epel-7-x86_64/
 
 bspwm not working? https://github.com/baskerville/bspwm/archive/b0e8dd383e906589113b75fdfcb9ce9d20a863f4.zip
+
+php not working? make sure "fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;" is in nginx.conf, and nginx has permissions to php folders and /var/lib/php/session/
