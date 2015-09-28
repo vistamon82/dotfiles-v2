@@ -16,7 +16,7 @@ bspwm not working? https://github.com/baskerville/bspwm/archive/b0e8dd383e906589
 php not working? make sure "fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;" is in nginx.conf, and nginx has permissions to php folders and /var/lib/php/session/
 
 or, try this:
-```
+```nginx
 location /phpmyadmin {
     disable_symlinks off;
 }
