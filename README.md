@@ -7,6 +7,12 @@ i2c errors? http://binbashblog.blogspot.ca/2014/01/dell-xps13-developer-editiong
 
 on login, if headphones are already plugged in, sound comes out speaker? http://askubuntu.com/questions/113704/make-pulseaudio-prefer-external-audio-device
 
+panel crashing because of this error?
+```
+lxpanel: cairo-scaled-font.c:459: _cairo_scaled_glyph_page_destroy: Assertion `!scaled_font->cache_frozen' failed.
+```
+sudo pacman -S ttf-droid
+
 ###for centos
 
 looking for dunst/i3/dzen2? http://copr-be.cloud.fedoraproject.org/results/maxamillion/epel7-i3wm/epel-7-x86_64/
